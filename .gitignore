@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+
+# ML artifacts
+trained_models/
+*.pt
+*.pth
+*.pkl
+*.h5
+
+# Data
+*.csv
+*.xlsx
+!sample_*.csv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+config.py
+*_secret*
+*_private*
