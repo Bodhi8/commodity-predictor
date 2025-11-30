@@ -211,10 +211,8 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ## 📬 Contact
 
-**[Your Name]** — [your.email@example.com](mailto:your.email@example.com)
+**Brian Curry** — brian at vector1.ai
 
-- Portfolio: [yourwebsite.com](https://yourwebsite.com)
-- LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
 
 ---
 
