@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodity Price Predictions - Live Dashboard</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-gold: #eab308;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .dashboard { max-width: 1400px; margin: 0 auto; }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+            border-radius: 16px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .live-badge {
+            display: inline-block;
+            background: var(--accent-green);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .header .updated { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .commodity-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .commodity-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .commodity-card.selected { border: 2px solid var(--accent-blue); }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .commodity-name { font-size: 1.1rem; font-weight: 600; }
+        .commodity-icon { font-size: 1.5rem; }
+        .current-price { font-size: 2rem; font-weight: 700; margin-bottom: 15px; }
+        
+        .predictions-row { display: flex; gap: 10px; }
+        
+        .prediction-badge {
+            flex: 1;
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        
+        .prediction-badge.up { background: rgba(34, 197, 94, 0.2); color: var(--accent-green); }
+        .prediction-badge.down { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+        .prediction-label { font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 2px; }
+        
+        .chart-section {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .chart-title { font-size: 1.3rem; font-weight: 600; }
+        .chart-controls { display: flex; gap: 10px; }
+        
+        .chart-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        
+        .chart-btn:hover, .chart-btn.active { background: var(--accent-blue); }
+        .chart-container { position: relative; height: 400px; }
+        
+        .forecast-table {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 25px;
+            overflow-x: auto;
+        }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--bg-card); }
+        th { color: var(--text-secondary); font-weight: 500; font-size: 0.85rem; text-transform: uppercase; }
+        .change-positive { color: var(--accent-green); }
+        .change-negative { color: var(--accent-red); }
+        
+        .loading { text-align: center; padding: 60px; color: var(--text-secondary); }
+        .loading-spinner {
+            width: 40px; height: 40px;
+            border: 3px solid var(--bg-card);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .error {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.5rem; }
+            .current-price { font-size: 1.5rem; }
+            .predictions-row { flex-direction: column; }
+            .chart-container { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <span class="live-badge">🔴 LIVE</span>
+            <h1>📈 Commodity Price Predictions</h1>
+            <p class="updated" id="lastUpdated">Loading...</p>
+        </header>
+        
+        <div id="content">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading live predictions...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Predictions served from your PUBLIC repo
+        const PREDICTIONS_URL = 'https://bodhi8.github.io/commodity-predictor/predictions/latest_predictions.json';
+        
+        const ICONS = {
+            'Crude Oil WTI': '🛢️', 'Gold': '🥇', 'Silver': '🥈',
+            'Natural Gas': '🔥', 'Copper': '🔶', 'Corn': '🌽', 'Wheat': '🌾'
+        };
+        
+        let data = null;
+        let selectedCommodity = null;
+        let chart = null;
+        
+        async function loadData() {
+            try {
+                const response = await fetch(PREDICTIONS_URL);
+                if (!response.ok) throw new Error('Unable to fetch predictions');
+                data = await response.json();
+                render();
+            } catch (error) {
+                document.getElementById('content').innerHTML = `
+                    <div class="error">
+                        <h3>Predictions not yet available</h3>
+                        <p style="margin-top:10px">Run the GitHub Action to generate your first predictions.</p>
+                        <p style="margin-top:10px"><a href="dashboard.html" style="color:var(--accent-blue)">View Demo Dashboard</a></p>
+                    </div>
+                `;
+            }
+        }
+        
+        function render() {
+            const commodities = Object.keys(data.predictions);
+            selectedCommodity = selectedCommodity || commodities[0];
+            
+            document.getElementById('lastUpdated').textContent = 
+                `Last updated: ${new Date(data.generated_at).toLocaleString()}`;
+            
+            document.getElementById('content').innerHTML = `
+                <div class="summary-grid" id="grid"></div>
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <h2 class="chart-title" id="chartTitle">${selectedCommodity}</h2>
+                        <div class="chart-controls">
+                            <button class="chart-btn active" data-range="30">30D</button>
+                            <button class="chart-btn" data-range="60">60D</button>
+                            <button class="chart-btn" data-range="90">90D</button>
+                        </div>
+                    </div>
+                    <div class="chart-container"><canvas id="priceChart"></canvas></div>
+                </div>
+                <div class="forecast-table">
+                    <h2>All Forecasts</h2>
+                    <table><thead><tr>
+                        <th>Commodity</th><th>Current</th><th>1-Day</th><th>5-Day</th><th>10-Day</th>
+                    </tr></thead><tbody id="tableBody"></tbody></table>
+                </div>
+            `;
+            
+            renderCards();
+            renderChart();
+            renderTable();
+            
+            document.querySelectorAll('.chart-btn').forEach(btn => {
+                btn.onclick = () => {
+                    document.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderChart(parseInt(btn.dataset.range));
+                };
+            });
+        }
+        
+        function renderCards() {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+            
+            for (const [name, info] of Object.entries(data.predictions)) {
+                const card = document.createElement('div');
+                card.className = `commodity-card ${name === selectedCommodity ? 'selected' : ''}`;
+                card.onclick = () => { selectedCommodity = name; renderCards(); renderChart(); };
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="commodity-name">${name}</span>
+                        <span class="commodity-icon">${ICONS[name] || '📊'}</span>
+                    </div>
+                    <div class="current-price">$${info.current_price.toLocaleString()}</div>
+                    <div class="predictions-row">
+                        ${Object.entries(info.forecasts).map(([h, p]) => `
+                            <div class="prediction-badge ${p.change_pct >= 0 ? 'up' : 'down'}">
+                                <div class="prediction-label">${h}</div>
+                                <div>${p.change_pct >= 0 ? '↑' : '↓'} ${Math.abs(p.change_pct).toFixed(1)}%</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+        
+        function renderChart(range = 30) {
+            const hist = data.historical[selectedCommodity];
+            const pred = data.predictions[selectedCommodity];
+            if (!hist) return;
+            
+            const dates = hist.dates.slice(-range);
+            const prices = hist.prices.slice(-range);
+            
+            const lastDate = new Date(dates[dates.length - 1]);
+            const fDates = [], fPrices = [];
+            
+            for (const [h, p] of Object.entries(pred.forecasts)) {
+                const d = new Date(lastDate);
+                d.setDate(d.getDate() + parseInt(h));
+                fDates.push(d.toISOString().split('T')[0]);
+                fPrices.push(p.price);
+            }
+            
+            if (chart) chart.destroy();
+            
+            chart = new Chart(document.getElementById('priceChart'), {
+                type: 'line',
+                data: {
+                    labels: [...dates, ...fDates],
+                    datasets: [
+                        { label: 'Historical', data: [...prices, ...Array(fDates.length).fill(null)],
+                          borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.4, pointRadius: 0 },
+                        { label: 'Forecast', data: [...Array(dates.length-1).fill(null), prices[prices.length-1], ...fPrices],
+                          borderColor: '#22c55e', borderDash: [5,5], pointRadius: 6, pointBackgroundColor: '#22c55e' }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: '#94a3b8' } } },
+                    scales: {
+                        x: { grid: { color: 'rgba(148,163,184,0.1)' }, ticks: { color: '#94a3b8' } },
+                        y: { grid: { color: 'rgba(148,163,184,0.1)' }, ticks: { color: '#94a3b8', callback: v => '$'+v.toLocaleString() } }
+                    }
+                }
+            });
+            
+            document.getElementById('chartTitle').textContent = selectedCommodity;
+        }
+        
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            for (const [name, info] of Object.entries(data.predictions)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${ICONS[name] || '📊'} ${name}</strong></td>
+                    <td>$${info.current_price.toLocaleString()}</td>
+                    ${['1d','5d','10d'].map(h => {
+                        const p = info.forecasts[h];
+                        if (!p) return '<td>-</td>';
+                        const cls = p.change_pct >= 0 ? 'change-positive' : 'change-negative';
+                        return `<td>$${p.price.toLocaleString()} <span class="${cls}">${p.change_pct >= 0 ? '↑' : '↓'}${Math.abs(p.change_pct).toFixed(1)}%</span></td>`;
+                    }).join('')}
+                `;
+                tbody.appendChild(row);
+            }
+        }
+        
+        loadData();
+        setInterval(loadData, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
