@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-11-29T20:25:59.728169",
+  "generated_at": "2025-11-30T06:12:52.112293",
   "predictions": {
     "Crude Oil WTI": {
       "ticker": "CL=F",
@@ -98,20 +98,20 @@
     },
     "Corn": {
       "ticker": "ZC=F",
-      "current_price": 447.75,
+      "current_price": 435.5,
       "last_updated": "2025-11-28",
       "forecasts": {
         "1d": {
-          "price": 426.29,
-          "change_pct": -4.79
+          "price": 424.42,
+          "change_pct": -2.54
         },
         "5d": {
-          "price": 399.76,
-          "change_pct": -10.72
+          "price": 410.73,
+          "change_pct": -5.69
         },
         "10d": {
-          "price": 379.88,
-          "change_pct": -15.16
+          "price": 400.47,
+          "change_pct": -8.04
         }
       }
     },
@@ -1249,7 +1249,7 @@
         426.5,
         425.5,
         423.75,
-        447.75
+        435.5
       ]
     },
     "Wheat": {
