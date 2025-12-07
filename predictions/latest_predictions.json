@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-06T06:12:08.099445",
+  "generated_at": "2025-12-07T06:12:12.295898",
   "predictions": {
     "Crude Oil WTI": {
       "ticker": "CL=F",
@@ -22,20 +22,20 @@
     },
     "Gold": {
       "ticker": "GC=F",
-      "current_price": 4212.9,
+      "current_price": 4227.7,
       "last_updated": "2025-12-05",
       "forecasts": {
         "1d": {
-          "price": 3586.34,
-          "change_pct": -14.87
+          "price": 3588.71,
+          "change_pct": -15.11
         },
         "5d": {
-          "price": 2811.88,
-          "change_pct": -33.26
+          "price": 2798.88,
+          "change_pct": -33.8
         },
         "10d": {
-          "price": 2231.56,
-          "change_pct": -47.03
+          "price": 2207.05,
+          "change_pct": -47.8
         }
       }
     },
@@ -505,7 +505,7 @@
         4186.6,
         4199.3,
         4211.8,
-        4212.9
+        4227.7
       ]
     },
     "Silver": {
