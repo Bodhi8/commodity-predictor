@@ -1,136 +1,136 @@
 {
-  "generated_at": "2026-01-02T06:14:44.739579",
+  "generated_at": "2026-01-03T06:13:20.178549",
   "predictions": {
     "Crude Oil WTI": {
       "ticker": "CL=F",
-      "current_price": 57.78,
+      "current_price": 57.32,
       "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
-          "price": 62.79,
-          "change_pct": 8.68
+          "price": 62.73,
+          "change_pct": 9.44
         },
         "5d": {
-          "price": 68.99,
-          "change_pct": 19.4
+          "price": 69.42,
+          "change_pct": 21.12
         },
         "10d": {
-          "price": 73.64,
-          "change_pct": 27.44
+          "price": 74.44,
+          "change_pct": 29.86
         }
       }
     },
     "Gold": {
       "ticker": "GC=F",
-      "current_price": 4390.1,
+      "current_price": 4314.4,
       "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
-          "price": 3617.03,
-          "change_pct": -17.61
+          "price": 3606.11,
+          "change_pct": -16.42
         },
         "5d": {
-          "price": 2661.47,
-          "change_pct": -39.38
+          "price": 2730.61,
+          "change_pct": -36.71
         },
         "10d": {
-          "price": 1945.45,
-          "change_pct": -55.69
+          "price": 2074.59,
+          "change_pct": -51.91
         }
       }
     },
     "Silver": {
       "ticker": "SI=F",
-      "current_price": 73.4,
+      "current_price": 70.56,
       "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
-          "price": 49.12,
-          "change_pct": -33.09
+          "price": 49.01,
+          "change_pct": -30.54
         },
         "5d": {
-          "price": 19.1,
-          "change_pct": -73.98
+          "price": 22.38,
+          "change_pct": -68.28
         },
         "10d": {
-          "price": -3.4,
-          "change_pct": -104.63
+          "price": 2.42,
+          "change_pct": -96.56
         }
       }
     },
     "Natural Gas": {
       "ticker": "NG=F",
-      "current_price": 3.6,
+      "current_price": 3.62,
       "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
           "price": 3.61,
-          "change_pct": 0.33
+          "change_pct": -0.11
         },
         "5d": {
-          "price": 3.63,
-          "change_pct": 0.74
+          "price": 3.61,
+          "change_pct": -0.24
         },
         "10d": {
-          "price": 3.64,
-          "change_pct": 1.05
+          "price": 3.61,
+          "change_pct": -0.33
         }
       }
     },
     "Copper": {
       "ticker": "HG=F",
-      "current_price": 5.74,
+      "current_price": 5.64,
       "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
-          "price": 5.16,
-          "change_pct": -10.13
+          "price": 5.15,
+          "change_pct": -8.65
         },
         "5d": {
-          "price": 4.44,
-          "change_pct": -22.65
+          "price": 4.55,
+          "change_pct": -19.34
         },
         "10d": {
-          "price": 3.9,
-          "change_pct": -32.03
+          "price": 4.1,
+          "change_pct": -27.35
         }
       }
     },
     "Corn": {
       "ticker": "ZC=F",
-      "current_price": 441.0,
-      "last_updated": "2025-12-31",
+      "current_price": 437.5,
+      "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
-          "price": 428.95,
-          "change_pct": -2.73
+          "price": 428.2,
+          "change_pct": -2.12
         },
         "5d": {
-          "price": 414.05,
-          "change_pct": -6.11
+          "price": 416.71,
+          "change_pct": -4.75
         },
         "10d": {
-          "price": 402.89,
-          "change_pct": -8.64
+          "price": 408.1,
+          "change_pct": -6.72
         }
       }
     },
     "Wheat": {
       "ticker": "ZW=F",
       "current_price": 506.5,
-      "last_updated": "2025-12-31",
+      "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
-          "price": 521.03,
-          "change_pct": 2.87
+          "price": 520.26,
+          "change_pct": 2.72
         },
         "5d": {
-          "price": 539.0,
-          "change_pct": 6.42
+          "price": 537.27,
+          "change_pct": 6.07
         },
         "10d": {
-          "price": 552.46,
-          "change_pct": 9.07
+          "price": 550.01,
+          "change_pct": 8.59
         }
       }
     }
@@ -319,7 +319,7 @@
         58.08,
         57.95,
         57.42,
-        57.78
+        57.32
       ]
     },
     "Gold": {
@@ -505,7 +505,7 @@
         4325.1,
         4370.1,
         4325.6,
-        4390.1
+        4314.4
       ]
     },
     "Silver": {
@@ -691,7 +691,7 @@
         69.86,
         77.37,
         70.13,
-        73.4
+        70.56
       ]
     },
     "Natural Gas": {
@@ -877,7 +877,7 @@
         4.69,
         3.97,
         3.69,
-        3.6
+        3.62
       ]
     },
     "Copper": {
@@ -1063,12 +1063,11 @@
         5.49,
         5.73,
         5.63,
-        5.74
+        5.64
       ]
     },
     "Corn": {
       "dates": [
-        "2025-08-25",
         "2025-08-26",
         "2025-08-27",
         "2025-08-28",
@@ -1157,10 +1156,10 @@
         "2025-12-26",
         "2025-12-29",
         "2025-12-30",
-        "2025-12-31"
+        "2025-12-31",
+        "2026-01-02"
       ],
       "prices": [
-        389.25,
         387.5,
         382.5,
         385.5,
@@ -1249,12 +1248,12 @@
         450.0,
         442.25,
         440.5,
-        441.0
+        440.25,
+        437.5
       ]
     },
     "Wheat": {
       "dates": [
-        "2025-08-25",
         "2025-08-26",
         "2025-08-27",
         "2025-08-28",
@@ -1343,10 +1342,10 @@
         "2025-12-26",
         "2025-12-29",
         "2025-12-30",
-        "2025-12-31"
+        "2025-12-31",
+        "2026-01-02"
       ],
       "prices": [
-        506.75,
         509.5,
         502.25,
         510.25,
@@ -1435,6 +1434,7 @@
         519.0,
         513.0,
         510.75,
+        507.0,
         506.5
       ]
     }
