@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-03T06:13:20.178549",
+  "generated_at": "2026-01-04T06:13:40.329314",
   "predictions": {
     "Crude Oil WTI": {
       "ticker": "CL=F",
@@ -22,39 +22,39 @@
     },
     "Gold": {
       "ticker": "GC=F",
-      "current_price": 4314.4,
+      "current_price": 4329.6,
       "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
-          "price": 3606.11,
-          "change_pct": -16.42
+          "price": 3608.42,
+          "change_pct": -16.66
         },
         "5d": {
-          "price": 2730.61,
-          "change_pct": -36.71
+          "price": 2716.99,
+          "change_pct": -37.25
         },
         "10d": {
-          "price": 2074.59,
-          "change_pct": -51.91
+          "price": 2049.02,
+          "change_pct": -52.67
         }
       }
     },
     "Silver": {
       "ticker": "SI=F",
-      "current_price": 70.56,
+      "current_price": 71.01,
       "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
-          "price": 49.01,
-          "change_pct": -30.54
+          "price": 49.03,
+          "change_pct": -30.96
         },
         "5d": {
-          "price": 22.38,
-          "change_pct": -68.28
+          "price": 21.85,
+          "change_pct": -69.23
         },
         "10d": {
-          "price": 2.42,
-          "change_pct": -96.56
+          "price": 1.49,
+          "change_pct": -97.91
         }
       }
     },
@@ -79,20 +79,20 @@
     },
     "Copper": {
       "ticker": "HG=F",
-      "current_price": 5.64,
+      "current_price": 5.69,
       "last_updated": "2026-01-02",
       "forecasts": {
         "1d": {
-          "price": 5.15,
-          "change_pct": -8.65
+          "price": 5.16,
+          "change_pct": -9.41
         },
         "5d": {
-          "price": 4.55,
-          "change_pct": -19.34
+          "price": 4.49,
+          "change_pct": -21.03
         },
         "10d": {
-          "price": 4.1,
-          "change_pct": -27.35
+          "price": 4.0,
+          "change_pct": -29.74
         }
       }
     },
@@ -505,7 +505,7 @@
         4325.1,
         4370.1,
         4325.6,
-        4314.4
+        4329.6
       ]
     },
     "Silver": {
@@ -691,7 +691,7 @@
         69.86,
         77.37,
         70.13,
-        70.56
+        71.01
       ]
     },
     "Natural Gas": {
@@ -1063,7 +1063,7 @@
         5.49,
         5.73,
         5.63,
-        5.64
+        5.69
       ]
     },
     "Corn": {
